@@ -1,5 +1,6 @@
-#Leetcode 总结：（start on 20181008）
-##1015 德才论 （25 分）
+# Leetcode 总结：（start on 20181008）
+[TOC]
+## <1> 1015 德才论 （25 分）
 >宋代史学家司马光在《资治通鉴》中有一段著名的“德才论”：“是故才德全尽谓之圣人，才德兼亡谓之愚人，德胜才谓之君子，才胜德谓之小人。凡取人之术，苟不得圣人，君子而与之，与其得小人，不若得愚人。”
 
 >现给出一批考生的德才分数，请根据司马光的理论给出录取排名。
@@ -99,7 +100,7 @@ def main():
 if __name__ == '__main__':
     main()
 ```
-##Minimum Depth of Binary Tree
+## <2> Minimum Depth of Binary Tree（二叉树的最小深度）
 >Given a binary tree, find its minimum depth.
 
 >The minimum depth is the number of nodes along the shortest path from the root node down to the nearest leaf node.
@@ -148,4 +149,110 @@ class Solution(object):     # 感觉测试实例有问题，没有通过。[1,2]
             depth+=1	#如果一层都不为空加1
             result = result2 	#更新根节点列表
 
+```
+## <3>Regular Expression Matching（正则匹配）
+
+	Given an input string (s) and a pattern (p), implement regular expression matching with support for '.' and '*'.
+
+	'.' Matches any single character.
+	'*' Matches zero or more of the preceding element.
+	The matching should cover the entire input string (not partial).
+
+	Note:
+
+	s could be empty and contains only lowercase letters a-z.
+	p could be empty and contains only lowercase letters a-z, and characters like . or *.
+	Example 1:
+
+	Input:
+	s = "aa"
+	p = "a"
+	Output: false
+	Explanation: "a" does not match the entire string "aa".
+	Example 2:
+
+	Input:
+	s = "aa"
+	p = "a*"
+	Output: true
+	Explanation: '*' means zero or more of the precedeng element, 'a'. Therefore, by repeating 'a' once, it becomes "aa".
+	Example 3:
+
+	Input:
+	s = "ab"
+	p = ".*"
+	Output: true
+	Explanation: ".*" means "zero or more (*) of any character (.)".
+	Example 4:
+
+	Input:
+	s = "aab"
+	p = "c*a*b"
+	Output: true
+	Explanation: c can be repeated 0 times, a can be repeated 1 time. Therefore it matches "aab".
+	Example 5:
+
+	Input:
+	s = "mississippi"
+	p = "mis*is*p*."
+	Output: false
+
+solution one:（递归）
+```python
+class Solution(object):
+    def isMatch(self, s, p):
+        """
+        :type s: str
+        :type p: str
+        :rtype: bool
+        """    
+        if not p:	# 判断是否都已经匹配结束
+            return not s
+        first_match = bool (s) and p[0] in {s[0], '.'}	# 判断s的第一个字符是否可以匹配成功
+        if len(p)>=2 and p[1] == '*':
+            # 如果第一个字符匹配成功，将第一个s字符砍掉（*前的字符可以匹配一次到多次）。或者砍掉p的两个字符，再次与s进行匹配（*前的字符可以匹配0次）。
+            return ((first_match and self.isMatch(s[1:],p)) or self.isMatch(s,p[2:]))   # 两个匹配的递归原则有点难理解。
+        else:
+            return first_match and self.isMatch(s[1:],p[1:])    #当没有*时，匹配的规则较为简单，每一次砍掉一个s字符和p字符。
+```
+但是递归的时间和空间消耗比较大
+
+solution two：（动态规划）
+version 1(Top-Down)
+```python
+class Solution(object):
+    def isMatch(self, text, pattern):
+        memo = {}
+        def dp(i, j):
+            if (i, j) not in memo:
+                if j == len(pattern):
+                    ans = i == len(text)
+                else:
+                    first_match = i < len(text) and pattern[j] in {text[i], '.'}
+                    if j+1 < len(pattern) and pattern[j+1] == '*':
+                        ans = dp(i, j+2) or first_match and dp(i+1, j)
+                    else:
+                        ans = first_match and dp(i+1, j+1)
+
+                memo[i, j] = ans
+            return memo[i, j]
+
+        return dp(0, 0)
+```
+version 2(Down-Top)
+```python
+class Solution(object):
+    def isMatch(self, text, pattern):
+        dp = [[False] * (len(pattern) + 1) for _ in range(len(text) + 1)]
+
+        dp[-1][-1] = True
+        for i in range(len(text), -1, -1):
+            for j in range(len(pattern) - 1, -1, -1):
+                first_match = i < len(text) and pattern[j] in {text[i], '.'}
+                if j+1 < len(pattern) and pattern[j+1] == '*':
+                    dp[i][j] = dp[i][j+2] or first_match and dp[i+1][j]
+                else:
+                    dp[i][j] = first_match and dp[i+1][j+1]
+
+        return dp[0][0]
 ```
