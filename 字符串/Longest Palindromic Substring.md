@@ -39,3 +39,4 @@ class Solution(object):
 
         return s[maxi:maxi+maxlen]
 ```
+动态规划的核心元素：最优子结构，边界，状态转移方程式
