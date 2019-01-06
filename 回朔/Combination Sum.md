@@ -29,7 +29,7 @@ Solution:虽然已经写了一道回朔的问题，但是刚开始写的时候�
 过程：
 1. 首先定义一个全局的变量results用来存放最终的结果，定义一个局部的全局变量，用来存放一个满足条件的组。
 2. 定义回朔方法，DFS，candidates，target，result都添加进去，接着是写结束前进的条件target-sum(result),根据条件来判读是否进行回朔，如果是一个回朔点，就将此组数据添加到results中，否则就往下继续遍历。
-
+result1：
 ```python
 class Solution(object):
     def combinationSum(self, candidates, target):
@@ -53,5 +53,31 @@ class Solution(object):
                     DFS(candidates, results, result, i, target) #继续遍历并判断是否满足条件
                     result.pop()	# 进行回退
         DFS(candidates, results, result,candidates[0], target)
+        return results
+```
+result2:与上面的思想是相同的，但是有些细节的改动（直接传递target-i的值，也即后面candidates的target值），一定程度上提高了时间效率
+```python
+class Solution(object):
+    def combinationSum(self, candidates, target):
+        """
+        :type candidates: List[int]
+        :type target: int
+        :rtype: List[List[int]]
+        """
+        candidates.sort()
+        results = []
+        result = []
+        def DFS(results, tempresult, candidates, remain, current):
+            if(remain< 0):
+                return
+            elif(remain == 0):
+                results.append(copy.deepcopy(tempresult))
+                
+            for i in candidates:
+                if i>=current:
+                    result.append(i)
+                    DFS(results, tempresult, candidates, remain-i, i)
+                    result.pop()
+        DFS(results, result, candidates, target, candidates[0])
         return results
 ```
