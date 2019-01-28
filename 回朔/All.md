@@ -1,3 +1,4 @@
+```java
 Subsets : https://leetcode.com/problems/subsets/
 
 public List<List<Integer>> subsets(int[] nums) {
@@ -97,8 +98,9 @@ private void backtrack(List<List<Integer>> list, List<Integer> tempList, int [] 
         }
     }
 }
+```
 Combination Sum II (can't reuse same element) : https://leetcode.com/problems/combination-sum-ii/
-
+```java
 public List<List<Integer>> combinationSum2(int[] nums, int target) {
     List<List<Integer>> list = new ArrayList<>();
     Arrays.sort(nums);
@@ -146,3 +148,4 @@ public boolean isPalindrome(String s, int low, int high){
       if(s.charAt(low++) != s.charAt(high--)) return false;
    return true;
 } 
+```
