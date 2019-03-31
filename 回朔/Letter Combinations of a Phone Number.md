@@ -44,7 +44,7 @@ class Solution(object):
         DFS(every,results,result,0)
         return results
 ```
-方法二：不使用回朔法，而使用组合的方法，生成结果。
+方法二：不使用回朔法，而使用python中的列表生成式，生成结果。
 ```python
 class Solution(object):
     def letterCombinations(self, digits):
