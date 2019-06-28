@@ -67,6 +67,10 @@ H~2~O is是液体。
 
 带尺寸的图片: ![Alt](https://avatar.csdn.net/7/7/B/1_ralf_hx163com.jpg =30x30)
 
+居中的图片: ![Alt](https://avatar.csdn.net/7/7/B/1_ralf_hx163com.jpg#pic_center)
+
+居中并且带尺寸的图片: ![Alt](https://avatar.csdn.net/7/7/B/1_ralf_hx163com.jpg#pic_center =30x30)
+
 当然，我们为了让用户更加便捷，我们增加了图片拖拽功能。
 
 
@@ -91,11 +95,10 @@ var foo = 'bar';
 
 - [ ] 计划任务
 - [x] 完成任务
-
+- [ ] 计划任务
 
 ## 创建一个表格
 一个简单的表格是这么创建的：
-
 项目     | Value
 -------- | -----
 电脑  | $1600
@@ -106,7 +109,6 @@ var foo = 'bar';
 使用`:---------:`居中
 使用`:----------`居左
 使用`----------:`居右
-
 | 第一列       | 第二列         | 第三列        |
 |:-----------:| -------------:|:-------------|
 | 第一列文本居中 | 第二列文本居右  | 第三列文本居左 | 
@@ -114,7 +116,6 @@ var foo = 'bar';
 
 ### SmartyPants
 SmartyPants将ASCII标点字符转换为“智能”印刷标点HTML实体。例如：
-
 |    TYPE   |ASCII                          |HTML                         
 |----------------|-------------------------------|-----------------------------|
 |Single backticks|`'Isn't this fun?'`            |'Isn't this fun?'            |

@@ -28,9 +28,9 @@ class Solution(object):
         :rtype: int
         """
         numsLen = len(nums)
-        step = 0        # 记录步数
+        step = 0        # 记录所走的步数
         curent = 0      # 记录当前可以到达的位置
-        nextLoca = 0    # 记录当前位置前面可以到达的最远位置
+        nextLoca = 0    # 记录当前位置与current位置之间可以到达的最远位置
         i = 0           # 记录遍历索引值
         while(i<numsLen):
             if curent >= numsLen-1:
