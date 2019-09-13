@@ -21,6 +21,7 @@ Solution:
 **递归定义最优解的结构**：dp[j] = min(dp[j],dp[j+1])+triangle[endLine-i-2][j]<br>
 **计算最优解**：自底向上方法，dp作为一个记事本<br>
 **输入**：dp[0]就是最小值<br>
+
 ```python
 class Solution(object):
     def minimumTotal(self, triangle):

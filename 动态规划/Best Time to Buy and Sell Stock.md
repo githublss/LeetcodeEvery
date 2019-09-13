@@ -19,7 +19,7 @@ Input: [7,6,4,3,1]
 Output: 0
 Explanation: In this case, no transaction is done, i.e. max profit = 0.
 ```
-solution:
+solution:此题与上一道题的不同之处是最多只允许进行一次买卖
 ```python
 class Solution(object):
     def maxProfit(self, prices):
@@ -35,8 +35,8 @@ class Solution(object):
         #             maxResult = prices[j+i+1]-prices[i]
         # return maxResult
         
-        # (2)遍历一次
-        minP = sys.maxint
+        # (2)遍历一次，使用minP来记录交易中的最低价格，遍历找到最大利润值
+        minP = sys.maxint   # python3中用 sys.maxsize来获取最大整数
         maxP = 0
         for i in range(len(prices)):
             if (prices[i] < minP):
