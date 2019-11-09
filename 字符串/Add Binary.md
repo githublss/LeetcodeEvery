@@ -64,3 +64,27 @@ public:
     }
 };
 ```
+下面的方法显得更加简洁，使用 string &insert(int p0, int n, char c);//此函数在p0处插入n个字符c
+来代替 s = char(c % 2 + '0') + s; 使得运行时间大大的缩减，
+```C++
+class Solution
+{
+public:
+    string addBinary(string a, string b)
+    {
+        string s = "";
+        
+        int c = 0, i = a.size() - 1, j = b.size() - 1;
+        while(i >= 0 || j >= 0 || c == 1)
+        {
+            c += i >= 0 ? a[i --] - '0' : 0;
+            c += j >= 0 ? b[j --] - '0' : 0;
+            // s = char(c % 2 + '0') + s;
+            s.insert(0,1,(c % 2 + '0'));
+            c /= 2;
+        }
+        
+        return s;
+    }
+};
+```
