@@ -39,3 +39,29 @@ class Solution(object):
                 map[nums[i]] = i
         return []
 ```
+使用C++模板库中的unordered_map<>建立一个哈希表，使得时间复杂度为O（n）。
+```C++
+class Solution {
+public:
+    vector<int> twoSum(vector<int>& nums, int target) {
+        vector<int> result;
+        if(nums.size()<=1)
+            return result;
+        unordered_map<int,int> myMap;
+        for(int i=0;i<nums.size();i++){
+            myMap[nums[i]] = i;
+        }
+        for(int i=0;i<nums.size();i++){
+            int another = target - nums[i];
+            if(myMap.find(another) != myMap.end()){
+                if(myMap[another] == i) // 为了防止出现某个数是target的两倍的情况
+                    continue;
+                result.push_back(i);
+                result.push_back(myMap[another]);
+                break;
+            }
+        }
+        return result;
+    }
+};
+```
